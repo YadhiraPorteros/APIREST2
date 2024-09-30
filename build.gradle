@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.3'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Spring Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// H2 Database
+	runtimeOnly 'com.h2database:h2'
+
+	// OpenAPI Swagger
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
+
+	// Hibernate Envers
+	implementation 'org.hibernate.orm:hibernate-envers:6.4.4.Final'
+
+	// Spring Boot Starter Validation
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.5'
+
+	// MapStruct
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+	// Lombok MapStruct Binding
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+
+	// JSON
+	implementation 'org.json:json:20231013'
+
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Development Tools
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.jar {
+	enabled = true
+}
+
+bootJar {
+	enabled = true
+}
